@@ -13,11 +13,4 @@ class StudentGradeTest {
        int[][] results = StudentGrade.canCollectNumberOfStudentAndSubject(numberOfStudent, numberOfSubject);
        assertEquals(4, results.length);
     }
-
-    @Test
-    public void testThatStudentGradeCanStoreStudentScoreTest(){
-        int numberOfStudent = 4;
-        int numberOfSubject = 3;
-        StudentGrade.
-    }
 }
