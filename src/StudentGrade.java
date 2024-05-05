@@ -22,32 +22,56 @@ public class StudentGrade {
                 detailsStore[count][innerCount] = number;
             }
         }
-        System.out.println(" STUDENT  SUB1 SUB2 SUB3");
+
+        int[][] num1 = printOut(detailsStore);
+
+    }
+
+
+    public static int[][] printOut(int[][] detailsStore){
+        int[][] nums = new int[detailsStore.length][detailsStore.length + 2];
+        System.out.println(Arrays.deepToString(nums));
         for (int row = 0; row < detailsStore.length; row++) {
 //            System.out.println(row);
             System.out.printf("Student %d\t", row+1);
             for (int column = 0; column < detailsStore[row].length; column++) {
-                System.out.print(detailsStore[row][column] + "   ");
+                  nums[row][column] = detailsStore[row][column];
+                System.out.println(Arrays.deepToString(nums));
             }
             System.out.println();
         }
-        System.out.println(canCalculateTheTotal(detailsStore));
+        return canCalculateTheTotal(nums, detailsStore);
     }
+
     public static int[][] canCollectNumberOfStudentAndSubject(int numberOfStudent, int numberOfSubject) {
         int[][] storeDetails = new int[numberOfStudent][numberOfSubject];
         return storeDetails;
     }
 
-    public static int[][] canCalculateTheTotal(int[][] detailsStore) {
-        int[] nums = new int[detailsStore.length];
-        System.out.println(Arrays.toString(nums));
+    public static int[][] canCalculateTheTotal(int[][] nums, int[][] detailsStore) {
+        int[] num1 = new int[detailsStore.length];
+        System.out.println(Arrays.toString(num1));
         int count1 = 0;
         for (int count = 0; count < detailsStore.length; count++) {
             for (int innerCount = 0; innerCount < detailsStore[count].length; innerCount++) {
-//                nums[count1] =
+                num1[count]+=detailsStore[count][innerCount];
+
             }
         }
 
-        return detailsStore;
+        for (int counter = 0; counter < nums.length; counter++  ) {
+            for (int innerCount = 0; innerCount < nums[counter].length; innerCount++) {
+                if (innerCount == nums[counter].length -3) {
+                    nums[counter][innerCount] = num1[counter];
+                    System.out.println(Arrays.deepToString(nums));
+                }
+            }
+        }
+
+
+
+        return nums;
     }
+
 }
+
