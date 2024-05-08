@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 import static java.lang.System.in;
@@ -28,25 +27,28 @@ public class StudentGrade {
         int[][] num1 = printOut(detailsStore);
         int[] numberOfTotal = canCalculateTheTotal(num1, detailsStore);
         double[] numberOfAverage = calculateTheAverage(numberOfTotal, numberOfSubject,numberOfStudent);
-        int[] numberOfPosition = findThePosition(numberOfTotal);
+        int[] sortTheArray = sortTheArray(numberOfTotal);
+        int[] numberOfPosition = findThePosition(sortTheArray, numberOfTotal);
 
 
+        System.out.println(
+                """
+                =====================================================
+                 STUDENT   SUB1   SUB2   SUB3    TOT      AVE    POS
+                =====================================================""");
+               for (int count = 0; count < num1.length; count++){
+                   System.out.printf("Student %d\t", count+1);
+                  for (int innerCount = 0; innerCount < num1[count].length; innerCount++) {
+                         System.out.print(num1[count][innerCount] + "     ");
 
-
-
-        for (int count = 0; count < num1.length; count++){
-            System.out.printf("Student %d\t", count+1);
-            for (int innerCount = 0; innerCount < num1[count].length; innerCount++) {
-                System.out.print(num1[count][innerCount] + "  ");
-
-            }
-
-            System.out.print(numberOfTotal[count] + "  ");
-            System.out.print(numberOfAverage[count] + "  ");
-            System.out.println();
-
-        }
-
+                  }
+                  System.out.print(numberOfTotal[count] + "     ");
+                  System.out.print(numberOfAverage[count] +"   ");
+                  System.out.print(numberOfPosition[count] + "         ");
+                  System.out.println();
+               }
+               System.out.println("===================================================");
+               System.out.println("===================================================");
     }
 
 
@@ -87,7 +89,7 @@ public class StudentGrade {
     }
 
 
-    private static int[] findThePosition(int[] numberOfTotal) {
+    private static int[] sortTheArray(int[] numberOfTotal) {
         int[] resultNum = new int[numberOfTotal.length];
 
         for (int count = 0; count < numberOfTotal.length; count++) {
@@ -99,20 +101,31 @@ public class StudentGrade {
             int nums = resultNum[count];
             int counter;
             for ( counter = count + 1; counter < resultNum.length; counter++) {
-                if (nums == resultNum[counter]) break;
+                if (nums > resultNum[counter]) break;
             }
             if (counter == resultNum.length) {
                 numbers[count] = nums;
                 count++;
             }else {
-                int tempo = resultNum[count];
-                resultNum[count] = nums;
-                resultNum[counter] = tempo;
+                int tempo = resultNum[counter];
+                resultNum[counter] = nums;
+                resultNum[count] = tempo;
             }
         }
+        return numbers;
     }
 
+    private static int[] findThePosition(int[] sortTheArray, int[] numberOfTotal) {
+        int[] position = new int[numberOfTotal.length];
 
-
+        for (int count = 0; count < numberOfTotal.length; count++) {
+            for (int innerCount = 0; innerCount < sortTheArray.length; innerCount++) {
+                if (numberOfTotal[count] == sortTheArray[innerCount]) {
+                    position[count] = numberOfTotal.length - innerCount;
+                }
+            }
+        }
+        return position;
+    }
 }
 
