@@ -13,37 +13,51 @@ public class StudentGrade {
         System.out.println("How many subject did they do?:   ");
         int numberOfSubject = keyboardInput.nextInt();
 
-        int[][] detailsStore = canCollectNumberOfStudentAndSubject(numberOfStudent,numberOfSubject);
+        int[][] detailsStore = canCollectNumberOfStudentAndSubject(numberOfStudent , numberOfSubject);
         for (int count = 0; count < detailsStore.length; count++) {
-            System.out.printf("Entering score for student %d\n",count+1);
+//            System.out.printf("Entering score for student %d\n",count+1);
             for (int innerCount = 0; innerCount < detailsStore[count].length; innerCount++) {
+                System.out.printf("Entering score for student %d\n",count+1);
                 System.out.printf("Enter score for subject %d: \n", innerCount+1);
                 int number = keyboardInput.nextInt();
+                System.out.println("Saving" + "  " + ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                 detailsStore[count][innerCount] = number;
             }
         }
 
         int[][] num1 = printOut(detailsStore);
+        int[] numberOfTotal = canCalculateTheTotal(num1, detailsStore);
+        double[] numberOfAverage = calculateTheAverage(numberOfTotal, numberOfSubject,numberOfStudent);
+        int[] numberOfPosition = findThePosition(numberOfTotal);
+
+
+
+
 
         for (int count = 0; count < num1.length; count++){
             System.out.printf("Student %d\t", count+1);
             for (int innerCount = 0; innerCount < num1[count].length; innerCount++) {
                 System.out.print(num1[count][innerCount] + "  ");
+
             }
+
+            System.out.print(numberOfTotal[count] + "  ");
+            System.out.print(numberOfAverage[count] + "  ");
             System.out.println();
+
         }
 
     }
 
 
     public static int[][] printOut(int[][] detailsStore){
-        int[][] nums = new int[detailsStore.length][detailsStore.length + 2];
+        int[][] nums = new int[detailsStore.length][detailsStore.length -1];
         for (int row = 0; row < detailsStore.length; row++) {
             for (int column = 0; column < detailsStore[row].length; column++) {
                   nums[row][column] = detailsStore[row][column];
             }
         }
-        return canCalculateTheTotal(nums, detailsStore);
+        return nums;
     }
 
     public static int[][] canCollectNumberOfStudentAndSubject(int numberOfStudent, int numberOfSubject) {
@@ -51,9 +65,8 @@ public class StudentGrade {
         return storeDetails;
     }
 
-    public static int[][] canCalculateTheTotal(int[][] nums, int[][] detailsStore) {
+    public static int[] canCalculateTheTotal(int[][] nums, int[][] detailsStore) {
         int[] num1 = new int[detailsStore.length];
-        int count1 = 0;
         for (int count = 0; count < detailsStore.length; count++) {
             for (int innerCount = 0; innerCount < detailsStore[count].length; innerCount++) {
                 num1[count]+=detailsStore[count][innerCount];
@@ -61,19 +74,45 @@ public class StudentGrade {
             }
         }
 
-        return toStoreTotalNumberInsideTheArray(nums, num1);
+        return num1;
     }
 
-    private static int[][] toStoreTotalNumberInsideTheArray(int[][] nums, int[] num1) {
-        for (int counter = 0; counter < nums.length; counter++  ) {
-            for (int innerCount = 0; innerCount < nums[counter].length; innerCount++) {
-                if (innerCount == nums[counter].length -3) {
-                    nums[counter][innerCount] = num1[counter];
-                }
+    private static double[] calculateTheAverage(int[]num1, int numberOfSubject, int pupil) {
+        double[] counter = new double[pupil];
+        for (int count = 0; count < num1.length; count++) {
+            double value = num1[count] * 1.00/ numberOfSubject;
+            counter[count] = Math.round(value * 100.00) /100.00;
+        }
+        return counter;
+    }
+
+
+    private static int[] findThePosition(int[] numberOfTotal) {
+        int[] resultNum = new int[numberOfTotal.length];
+
+        for (int count = 0; count < numberOfTotal.length; count++) {
+             resultNum[count] = numberOfTotal[count];
+        }
+
+        int[] numbers = new int[resultNum.length];
+        for (int count = 0; count < resultNum.length;) {
+            int nums = resultNum[count];
+            int counter;
+            for ( counter = count + 1; counter < resultNum.length; counter++) {
+                if (nums == resultNum[counter]) break;
+            }
+            if (counter == resultNum.length) {
+                numbers[count] = nums;
+                count++;
+            }else {
+                int tempo = resultNum[count];
+                resultNum[count] = nums;
+                resultNum[counter] = tempo;
             }
         }
-        return nums;
     }
+
+
 
 }
 
