@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 import static java.lang.System.in;
@@ -49,7 +50,22 @@ public class StudentGrade {
                }
                System.out.println("===================================================");
                System.out.println("===================================================");
+
+
+               int[] numberFirstIndex = collectFirstIndex(numberOfStudent, detailsStore);
+               int highestNumberInIndexZero = canReturnHighestNumber(numberFirstIndex);
+               int lowestNumberInIndexZero = canReturnLowestNumber(numberFirstIndex);
+
+            System.out.println(
+                    """
+                    SUBJECT  SUMMARY
+                    """);
+        for (int count = 0; count < numberOfSubject; count++) {
+            System.out.printf("Subject %d\t", count+1);
+        }
     }
+
+
 
 
     public static int[][] printOut(int[][] detailsStore){
@@ -127,5 +143,44 @@ public class StudentGrade {
         }
         return position;
     }
+
+    private static int[] collectFirstIndex(int numberOfStudent, int[][] detailsStore) {
+        int[] nums = new int[numberOfStudent];
+        int count;
+        for (count = 0; count < detailsStore.length; ) {
+            System.out.println(Arrays.toString(detailsStore[count]));
+            for (int innerCount = 0; innerCount < detailsStore[count].length - 2; innerCount++) {
+                   nums[count] = detailsStore[count][innerCount];
+            }
+            count++;
+        }
+
+      return nums;
+    }
+
+    private static int canReturnHighestNumber(int[] numberFirstIndex) {
+        int highestNumber = numberFirstIndex[0];
+
+        for (int count = 0; count < numberFirstIndex.length; count++) {
+            if (numberFirstIndex[count] > highestNumber) {
+                highestNumber = numberFirstIndex[count];
+            }
+        }
+        System.out.println(highestNumber);
+        return highestNumber;
+    }
+
+    private static int canReturnLowestNumber(int[] numberFirstIndex) {
+        int lowestNumber = numberFirstIndex[0];
+
+        for (int count = 0; count < numberFirstIndex.length; count++) {
+            if (numberFirstIndex[count] < lowestNumber) {
+                lowestNumber = numberFirstIndex[count];
+            }
+        }
+        System.out.println(lowestNumber);
+        return lowestNumber;
+    }
+
 }
 
