@@ -57,18 +57,24 @@ public class StudentGrade {
                int lowestNumberInIndexZero = canReturnLowestNumber(numberFirstIndex);
                int totalNumberInIndexZero = canReturnTheTotalNumber(numberFirstIndex);
                double averageNumberInIndexZero = canReturnAverageNumber(numberFirstIndex, numberOfStudent);
+               int numberOfPasses = canReturnNumberOfPass(numberFirstIndex);
+               int numberOfFails = canReturnNumberOfFails(numberFirstIndex);
 
                int[] numberSecondIndex = collectSecondIndex(numberOfStudent, detailsStore);
                int highestNumberInIndexFirst = canReturnHighestNumber(numberSecondIndex);
                int lowestNumberInIndexFirst = canReturnLowestNumber(numberSecondIndex);
                int totalNumberInIndexFirst = canReturnTheTotalNumber(numberSecondIndex);
                double averageNumberInIndexFirst = canReturnAverageNumber(numberSecondIndex, numberOfStudent);
+               int numberOfPasses1 = canReturnNumberOfPass(numberSecondIndex);
+               int numberOfFails1 = canReturnNumberOfFails(numberFirstIndex);
 
                int[] numberThirdIndex = collectThirdIndex(numberOfStudent, detailsStore);
-               int highestNumberInIndexThird = canReturnHighestNumber(numberThirdIndex);
-               int lowestNumberInIndexThird = canReturnLowestNumber(numberThirdIndex);
-               int totalNumberInIndexThird = canReturnTheTotalNumber(numberThirdIndex);
-               double averageNumberInIndexThird = canReturnAverageNumber(numberThirdIndex, numberOfStudent);
+               int highestNumberInIndexSecond = canReturnHighestNumber(numberThirdIndex);
+               int lowestNumberInIndexSecond = canReturnLowestNumber(numberThirdIndex);
+               int totalNumberInIndexSecond = canReturnTheTotalNumber(numberThirdIndex);
+               double averageNumberInIndexSecond = canReturnAverageNumber(numberThirdIndex, numberOfStudent);
+               int numberOfPasses2 = canReturnNumberOfPass(numberThirdIndex);
+               int numberOfFails2 = canReturnNumberOfFails(numberThirdIndex);
             System.out.println(
                     """
                     SUBJECT  SUMMARY
@@ -233,6 +239,30 @@ public class StudentGrade {
             count++;
         }
         return nums;
+    }
+
+    private static int canReturnNumberOfPass(int[] numberFirstIndex) {
+        int numberOfPass = 0;
+        int nums = 50;
+        for (int count = 0; count < numberFirstIndex.length; count++) {
+            if (numberFirstIndex[count] > nums){
+                numberOfPass++;
+            }
+        }
+        System.out.println(numberOfPass);
+        return numberOfPass;
+    }
+
+    private static int canReturnNumberOfFails(int[] numberFirstIndex) {
+        int numberOfFails = 0;
+        int nums = 50;
+        for (int count = 0; count < numberFirstIndex.length; count++) {
+            if (numberFirstIndex[count] < nums){
+                numberOfFails++;
+            }
+        }
+        System.out.println(numberOfFails);
+        return numberOfFails;
     }
 
 }
