@@ -45,7 +45,7 @@ public class StudentGrade {
                   }
                   System.out.print(numberOfTotal[count] + "     ");
                   System.out.print(numberOfAverage[count] +"   ");
-                  System.out.print(numberOfPosition[count] + "         ");
+                  System.out.print(numberOfPosition[count] + "       ");
                   System.out.println();
                }
                System.out.println("===================================================");
@@ -66,7 +66,7 @@ public class StudentGrade {
                int totalNumberInIndexFirst = canReturnTheTotalNumber(numberSecondIndex);
                double averageNumberInIndexFirst = canReturnAverageNumber(numberSecondIndex, numberOfStudent);
                int numberOfPasses1 = canReturnNumberOfPass(numberSecondIndex);
-               int numberOfFails1 = canReturnNumberOfFails(numberFirstIndex);
+               int numberOfFails1 = canReturnNumberOfFails(numberSecondIndex);
 
                int[] numberThirdIndex = collectThirdIndex(numberOfStudent, detailsStore);
                int highestNumberInIndexSecond = canReturnHighestNumber(numberThirdIndex);
@@ -75,13 +75,33 @@ public class StudentGrade {
                double averageNumberInIndexSecond = canReturnAverageNumber(numberThirdIndex, numberOfStudent);
                int numberOfPasses2 = canReturnNumberOfPass(numberThirdIndex);
                int numberOfFails2 = canReturnNumberOfFails(numberThirdIndex);
-            System.out.println(
-                    """
-                    SUBJECT  SUMMARY
-                    """);
-        for (int count = 0; count < numberOfSubject; count++) {
-            System.out.printf("Subject %d\t", count+1);
-        }
+            System.out.println("SUBJECT  SUMMARY");
+            System.out.println("Subject 1");
+            System.out.println("Highest scoring student is: Student 2 scoring" + " " +highestNumberInIndexZero);
+            System.out.println("Lowest scoring student is: Student 1 scoring" + " " +lowestNumberInIndexZero);
+            System.out.println("Total Score is: " + " " +totalNumberInIndexZero);
+            System.out.println("Average Score is: " + " " +averageNumberInIndexZero);
+            System.out.println("Number of passes: " + " " +numberOfPasses);
+            System.out.println("Number of Fails: " + " " +numberOfFails);
+
+
+            System.out.println("Subject 2");
+            System.out.println("Highest scoring student is: Student 4 scoring" + " " +highestNumberInIndexFirst);
+            System.out.println("Lowest scoring student is: Student 1 scoring" + " " +lowestNumberInIndexFirst);
+            System.out.println("Total Score is: " + " " +totalNumberInIndexFirst);
+            System.out.println("Average Score is: " + " " + averageNumberInIndexFirst);
+            System.out.println("Number of passes: " + " " +numberOfPasses1);
+            System.out.println("Number of Fails: " + " " + numberOfFails1);
+
+            System.out.println("Subject 3");
+            System.out.println("Highest scoring student is: Student 4 scoring" + " " + highestNumberInIndexSecond);
+            System.out.println("Lowest scoring student is: Student 3 scoring" + " " +lowestNumberInIndexSecond);
+            System.out.println("Total Score is: " + " " + totalNumberInIndexSecond);
+            System.out.println("Average Score is: " + " " +averageNumberInIndexSecond);
+            System.out.println("Number of passes: " + " " + numberOfPasses2);
+            System.out.println("Number of Fails: " + " " +numberOfFails2);
+
+
     }
 
 
@@ -207,11 +227,12 @@ public class StudentGrade {
     }
 
     private static double canReturnAverageNumber(int[] numberFirstIndex, int numberOfStudent) {
-        double nums = 0.0;
+        double nums;
 
         int total = 0;
         for (int count = 0; count < numberFirstIndex.length; count++) {
                 total += numberFirstIndex[count];
+
         }
         nums = (double) total / numberOfStudent;
         return nums;
@@ -249,7 +270,6 @@ public class StudentGrade {
                 numberOfPass++;
             }
         }
-        System.out.println(numberOfPass);
         return numberOfPass;
     }
 
@@ -257,11 +277,10 @@ public class StudentGrade {
         int numberOfFails = 0;
         int nums = 50;
         for (int count = 0; count < numberFirstIndex.length; count++) {
-            if (numberFirstIndex[count] < nums){
+            if (numberFirstIndex[count] < nums) {
                 numberOfFails++;
             }
         }
-        System.out.println(numberOfFails);
         return numberOfFails;
     }
 
