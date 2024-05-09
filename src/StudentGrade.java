@@ -55,7 +55,20 @@ public class StudentGrade {
                int[] numberFirstIndex = collectFirstIndex(numberOfStudent, detailsStore);
                int highestNumberInIndexZero = canReturnHighestNumber(numberFirstIndex);
                int lowestNumberInIndexZero = canReturnLowestNumber(numberFirstIndex);
+               int totalNumberInIndexZero = canReturnTheTotalNumber(numberFirstIndex);
+               double averageNumberInIndexZero = canReturnAverageNumber(numberFirstIndex, numberOfStudent);
 
+               int[] numberSecondIndex = collectSecondIndex(numberOfStudent, detailsStore);
+               int highestNumberInIndexFirst = canReturnHighestNumber(numberSecondIndex);
+               int lowestNumberInIndexFirst = canReturnLowestNumber(numberSecondIndex);
+               int totalNumberInIndexFirst = canReturnTheTotalNumber(numberSecondIndex);
+               double averageNumberInIndexFirst = canReturnAverageNumber(numberSecondIndex, numberOfStudent);
+
+               int[] numberThirdIndex = collectThirdIndex(numberOfStudent, detailsStore);
+               int highestNumberInIndexThird = canReturnHighestNumber(numberThirdIndex);
+               int lowestNumberInIndexThird = canReturnLowestNumber(numberThirdIndex);
+               int totalNumberInIndexThird = canReturnTheTotalNumber(numberThirdIndex);
+               double averageNumberInIndexThird = canReturnAverageNumber(numberThirdIndex, numberOfStudent);
             System.out.println(
                     """
                     SUBJECT  SUMMARY
@@ -64,8 +77,6 @@ public class StudentGrade {
             System.out.printf("Subject %d\t", count+1);
         }
     }
-
-
 
 
     public static int[][] printOut(int[][] detailsStore){
@@ -146,9 +157,7 @@ public class StudentGrade {
 
     private static int[] collectFirstIndex(int numberOfStudent, int[][] detailsStore) {
         int[] nums = new int[numberOfStudent];
-        int count;
-        for (count = 0; count < detailsStore.length; ) {
-            System.out.println(Arrays.toString(detailsStore[count]));
+        for (int count = 0; count < detailsStore.length; ) {
             for (int innerCount = 0; innerCount < detailsStore[count].length - 2; innerCount++) {
                    nums[count] = detailsStore[count][innerCount];
             }
@@ -166,7 +175,7 @@ public class StudentGrade {
                 highestNumber = numberFirstIndex[count];
             }
         }
-        System.out.println(highestNumber);
+//        System.out.println(highestNumber);
         return highestNumber;
     }
 
@@ -178,8 +187,52 @@ public class StudentGrade {
                 lowestNumber = numberFirstIndex[count];
             }
         }
-        System.out.println(lowestNumber);
+//        System.out.println(lowestNumber);
         return lowestNumber;
+    }
+
+    private static int canReturnTheTotalNumber(int[] numberFirstIndex) {
+        int totalNumber = 0;
+
+        for (int count = 0; count < numberFirstIndex.length; count++) {
+             totalNumber+=numberFirstIndex[count];
+        }
+        return totalNumber;
+    }
+
+    private static double canReturnAverageNumber(int[] numberFirstIndex, int numberOfStudent) {
+        double nums = 0.0;
+
+        int total = 0;
+        for (int count = 0; count < numberFirstIndex.length; count++) {
+                total += numberFirstIndex[count];
+        }
+        nums = (double) total / numberOfStudent;
+        return nums;
+    }
+
+    private static int[] collectSecondIndex(int numberOfStudent, int[][] detailsStore) {
+        int[] nums = new int[numberOfStudent];
+
+        for (int count = 0; count < detailsStore.length; ) {
+            for (int innerCount = 0; innerCount < detailsStore[count].length - 1; innerCount++) {
+                nums[count] = detailsStore[count][innerCount];
+            }
+            count++;
+        }
+        return nums;
+    }
+
+    private static int[] collectThirdIndex(int numberOfStudent, int[][] detailsStore) {
+        int[] nums = new int[numberOfStudent];
+
+        for (int count = 0; count < detailsStore.length; ) {
+            for (int innerCount = 0; innerCount < detailsStore[count].length; innerCount++) {
+                nums[count] = detailsStore[count][innerCount];
+            }
+            count++;
+        }
+        return nums;
     }
 
 }
