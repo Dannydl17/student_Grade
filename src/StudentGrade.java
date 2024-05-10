@@ -32,6 +32,7 @@ public class StudentGrade {
         int[] numberOfPosition = findThePosition(sortTheArray, numberOfTotal);
 
 
+
         System.out.println(
                 """
                 =====================================================
@@ -52,6 +53,10 @@ public class StudentGrade {
                System.out.println("===================================================");
 
 
+               int highestNumberInTotal = canReturnHighestNumber(numberOfTotal);
+               int lowesNumberInTotal = canReturnLowestNumber(numberOfTotal);
+               int totalNumberInTotal = canReturnTheTotalNumber(numberOfTotal);
+               double averageNumberInAverage = canAddAverageNumber(numberOfTotal);
                int[] numberFirstIndex = collectFirstIndex(numberOfStudent, detailsStore);
                int highestNumberInIndexZero = canReturnHighestNumber(numberFirstIndex);
                int lowestNumberInIndexZero = canReturnLowestNumber(numberFirstIndex);
@@ -59,6 +64,8 @@ public class StudentGrade {
                double averageNumberInIndexZero = canReturnAverageNumber(numberFirstIndex, numberOfStudent);
                int numberOfPasses = canReturnNumberOfPass(numberFirstIndex);
                int numberOfFails = canReturnNumberOfFails(numberFirstIndex);
+
+
 
                int[] numberSecondIndex = collectSecondIndex(numberOfStudent, detailsStore);
                int highestNumberInIndexFirst = canReturnHighestNumber(numberSecondIndex);
@@ -102,6 +109,23 @@ public class StudentGrade {
             System.out.println("Number of Fails: " + " " +numberOfFails2);
 
 
+        System.out.println("The hardest subject is Subject 2 with "+" "+ numberOfFails1 + " " + "failures");
+        System.out.println("The hardest subject is Subject 1 with "+" "+ numberOfPasses + " " + "passes");
+        System.out.println("The overall Highest score is scored by Student 2 in subject 1 scoring"+" "+ numberOfPasses);
+        System.out.println("The overall Highest score is scored by Student 1 in subject 2 scoring"+" "+ numberOfFails1);
+        System.out.println("===========================================================================");
+
+        System.out.println("CLASS SUMMARY");
+        System.out.println("============================================================================");
+        System.out.println("Best Graduating Student is:  Student 4 scoring"+"  "+ highestNumberInTotal);
+
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println("Worst Graduating Student is: Student 1 scoring" + "  "+ lowesNumberInTotal);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+        System.out.println("==============================================================================");
+        System.out.println("Class total score is:  " + " " + totalNumberInTotal);
+        System.out.println("Class Average score is:  " + " " + averageNumberInAverage);
     }
 
 
@@ -282,6 +306,15 @@ public class StudentGrade {
             }
         }
         return numberOfFails;
+    }
+
+    private static double canAddAverageNumber(int[] numberOfAverage) {
+        double totalNumber = 0.0;
+
+        for (int count = 0; count < numberOfAverage.length; count++) {
+            totalNumber+=numberOfAverage[count];
+        }
+        return totalNumber;
     }
 
 }
